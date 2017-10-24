@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:cache="http://www.springframework.org/schema/cache" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                    http://www.springframework.org/schema/beans/spring-beans.xsd
+                    http://www.springframework.org/schema/context
+                    http://www.springframework.org/schema/context/spring-context.xsd
+                    http://www.springframework.org/schema/jdbc
+                    http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+                    http://www.springframework.org/schema/tx
+                    http://www.springframework.org/schema/tx/spring-tx.xsd
+                    http://www.springframework.org/schema/cache
+                    http://www.springframework.org/schema/cache/spring-cache.xsd
+                    http://www.springframework.org/schema/aop
+                    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<import resource="hubciti-database-config.xml" />
+	
+	<context:component-scan base-package="com.hubciti" />
+	
+	<aop:config proxy-target-class="true" />
+
+<bean id="generalUseService" class="com.hubciti.generaluse.service.GeneralUseServiceImpl">
+		<property name="generalUseDao" ref="generalUseDao"></property>
+	</bean> 
+
+	<bean id="firstUseService" class="com.hubciti.firstuse.service.FirstUseServiceImpl">
+		<property name="firstUseDao" ref="firstUseDao"></property>
+	</bean>
+
+	<bean id="thisLocationService"
+		class="com.hubciti.thislocation.service.ThisLocationServiceImpl">
+		<property name="thisLocationDao" ref="thisLocationDao"></property>
+		<property name="firstUseDao" ref="firstUseDao"></property>
+	</bean>
+
+	<bean id="findService" class="com.hubciti.find.service.FindServiceImpl">
+		<property name="findDao" ref="findDao"></property>
+		<property name="firstUseDao" ref="firstUseDao"></property>
+		<property name="rateReviewDao" ref="rateReviewDao"></property>
+	</bean>
+
+	<bean id="hotDealsService" class="com.hubciti.hotdeals.service.HotDealsServiceImpl">
+		<property name="hotDealsDao" ref="hotDealsDao"></property>
+		<property name="firstUseDao" ref="firstUseDao"></property>
+	</bean>
+
+	<bean id="rateReviewService" class="com.hubciti.ratereview.service.RateReviewServiceImpl">
+		<property name="rateReviewDao" ref="rateReviewDao"></property>
+	</bean>
+
+	<bean id="galleryService" class="com.hubciti.gallery.service.GalleryServiceImpl">
+		<property name="galleryDao" ref="galleryDao"></property>
+		<property name="firstUseDao" ref="firstUseDao"></property>
+	</bean>
+
+	<bean id="scanNowService" class="com.hubciti.scannow.service.ScanNowServiceImpl">
+		<property name="scanNowDao" ref="scanNowDao" />
+		<property name="firstUseDao" ref="firstUseDao" />
+	</bean>
+
+	<bean id="alertEventService" class="com.hubciti.alertevent.service.AlertEventServiceImpl">
+		<property name="alertEventDao" ref="alertEventDao"></property>
+		<property name="firstUseDao" ref="firstUseDao" />
+	</bean>
+
+	<bean id="govQAService" class="com.hubciti.govqa.service.GovQAServiceImpl">
+	</bean>
+
+	<bean id="bandService" class="com.hubciti.band.service.BandServiceImpl">
+		<property name="bandDao" ref="bandDao" />
+		<property name="firstUseDao" ref="firstUseDao" />
+	</bean>
+
+
+	<cache:annotation-driven cache-manager="cacheManager" />
+
+	<!-- The statement cacheManager -->
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager"
+		p:cacheManager-ref="cacheManagerFactory" />
+
+	<!-- CacheManager factory -->
+	<bean id="cacheManagerFactory"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
+		p:configLocation="classpath:ehcache.xml" />
+
+
+</beans>

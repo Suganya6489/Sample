@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="true"
+	monitoring="autodetect" dynamicConfig="true">
+	<!-- <diskStore path="java.io.tmpdir" /> The system temporary files directory -->
+	<!-- Configure a custom cache maxElementsInMemory: The maximum allowed number 
+		of cached objects created in eternal: The cache object is permanent, if it 
+		is, the timeout settings will be ignored, the object never expire. timeToIdleSeconds: 
+		Passivation time cache data, just before an element., Two times the maximum 
+		time interval access time value, which can only be effective when the element 
+		is not permanently resident in, If the value is 0 means that the elements 
+		can be infinitely long pause. timeToLiveSeconds: Cache data time to live, 
+		is also an element from the construction to the maximum time interval of 
+		values., This can only be effective in the element is not a permanent resident, 
+		if the value of 0 means that the elements can be infinitely long pause. overflowToDisk: 
+		Insufficient memory, whether to enable the disk cache. memoryStoreEvictionPolicy: 
+		Elimination algorithm after the cache is full. -->
+	<!--<diskStore path="/opt/scansee/jboss/jboss-as-7.1.1.Final/standalone/tmp/cache" 
+		/> --><!--The specified cache file directory -->
+
+
+	<!-- ehcache-failsafe.xml If the CacheManager default constructor or factory 
+		method is called, Ehcache looks for a file called ehcache.xml in the top 
+		level of the classpath. Failing that, it looks for ehcache-failsafe.xml in 
+		the classpath. The ehcache-failsafe.xml file is packaged in the Ehcache JAR 
+		and should always be found. ehcache-failsafe.xml provides a simple default 
+		configuration to enable users to get started before they create their own 
+		ehcache.xml. When ehcache-failsafe.xml is used, Ehcache will emit a warning, 
+		reminding the user to set up a proper configuration. The meaning of the elements 
+		and attributes are explained in the section on ehcache.xml. -->
+
+	<!--<diskStore path="/opt/scansee/jboss/jboss-as-7.1.1.Final/standalone/tmp/cache" 
+		/> -->
+	<diskStore path="D:\Project\ScanSee\R_and_D\Caching\Ehcache_Data" />
+	<defaultCache eternal="false" timeToIdleSeconds="120"
+		timeToLiveSeconds="120" overflowToDisk="true" maxElementsOnDisk="10000000" />
+
+	<!-- overflowToDisk="true" -->
+
+	<!-- Dynamically Changing Cache Configuration While most of the Ehcache 
+		configuration is not changeable after startup, since Ehcache 2.0, certain 
+		cache configuration parameters can be modified dynamically at runtime. These 
+		include the following: *Expiration settings *timeToLive – The maximum number 
+		of seconds an element can exist in the cache regardless of access. The element 
+		expires at this limit and will no longer be returned from the cache. The 
+		default value is 0, which means no TTL eviction takes place (infinite lifetime). 
+		*timeToIdle – The maximum number of seconds an element can exist in the cache 
+		without being accessed. The element expires at this limit and will no longer 
+		be returned from the cache. The default value is 0, which means no TTI eviction 
+		takes place (infinite lifetime). Note that the *eternal attribute, when set 
+		to “true”, overrides timeToLive and timeToIdle so that no expiration can 
+		take place. -->
+
+	<cache name="getHubMenuDisplay" maxElementsInMemory="1000"
+		maxElementsOnDisk="1000000" eternal="false" overflowToDisk="true"
+		timeToIdleSeconds="3600" timeToLiveSeconds="14400"
+		diskSpoolBufferSizeMB="50" />
+
+	<cache name="getmenuDisplayForHubRegion" maxElementsInMemory="1000"
+		maxElementsOnDisk="1000000" eternal="false" overflowToDisk="true"
+		timeToIdleSeconds="3600" timeToLiveSeconds="14400"
+		diskSpoolBufferSizeMB="50" />
+
+	<cache name="categoryJsonInfo" maxElementsInMemory="1000"
+		maxElementsOnDisk="1000000" eternal="false" overflowToDisk="true"
+		timeToIdleSeconds="300" timeToLiveSeconds="600" diskSpoolBufferSizeMB="50" />
+
+	<cache name="singleCategoryRetailersJson" maxElementsInMemory="1000"
+		maxElementsOnDisk="1000000" eternal="false" overflowToDisk="true"
+		timeToIdleSeconds="300" timeToLiveSeconds="600" diskSpoolBufferSizeMB="50" />
+
+	<cache name="retailerSearchJson" maxElementsInMemory="1000"
+		maxElementsOnDisk="1000000" eternal="false" overflowToDisk="true"
+		timeToIdleSeconds="300" timeToLiveSeconds="600" diskSpoolBufferSizeMB="50" />
+
+	<cache name="categorySearchJson" maxElementsInMemory="1000"
+		maxElementsOnDisk="1000000" eternal="false" overflowToDisk="true"
+		timeToIdleSeconds="300" timeToLiveSeconds="600" diskSpoolBufferSizeMB="50" />
+
+	<cache name="getServiceRequestTypesByCategory"
+		maxElementsInMemory="1000" maxElementsOnDisk="10000000" eternal="false"
+		overflowToDisk="true" timeToIdleSeconds="300" timeToLiveSeconds="600"
+		diskSpoolBufferSizeMB="50" />
+</ehcache>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+
+	<display-name>HubCiti</display-name>
+
+	<servlet>
+		<servlet-name>Resteasy</servlet-name>
+		<servlet-class>
+			org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher</servlet-class>
+		<init-param>
+			<param-name>javax.ws.rs.Application</param-name>
+			<param-value>com.hubciti.rest.controller.AttachRestEasyControllersToURI</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Resteasy</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- <filter> <filter-name>monitoring</filter-name> <filter-class>net.bull.javamelody.MonitoringFilter</filter-class> 
+		</filter> <filter-mapping> <filter-name>monitoring</filter-name> <url-pattern>/*</url-pattern> 
+		</filter-mapping> <listener> <listener-class>net.bull.javamelody.SessionListener</listener-class> 
+		</listener> -->
+
+	<!-- <login-config> <auth-method>BASIC</auth-method> <realm-name>ApplicationRealm</realm-name> 
+		</login-config> <security-role> <description>Security for java melody monitoring</description> 
+		<role-name>User</role-name> </security-role> <security-constraint> <web-resource-collection> 
+		<web-resource-name>monitoring</web-resource-name> <url-pattern>/monitoring</url-pattern> 
+		</web-resource-collection> <auth-constraint> <role-name>User</role-name> 
+		</auth-constraint> <user-data-constraint> <transport-guarantee>NONE</transport-guarantee> 
+		</user-data-constraint> if SSL enabled (SSL and certificate must then be 
+		configured in the server) <user-data-constraint> <transport-guarantee>CONFIDENTIAL</transport-guarantee> 
+		</user-data-constraint> </security-constraint> -->
+	<context-param>
+		<param-name>org.jboss.jbossfaces.WAR_BUNDLES_JSF_IMPL</param-name>
+		<param-value>true</param-value>
+	</context-param>
+</web-app>
